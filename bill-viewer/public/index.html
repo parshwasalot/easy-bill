@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- Add this meta tag to handle old-style redirects -->
+    <script>
+      // Handle old-style URLs
+      if (window.location.pathname === '/index.html') {
+        const params = new URLSearchParams(window.location.search);
+        const id = params.get('id');
+        if (id) {
+          window.location.href = '/' + id;
+        }
+      }
+    </script>
+    <title>Uday Saree Show-Room</title>
+    <!-- Add Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Playfair+Display:wght@600&display=swap" rel="stylesheet">
+
+    <style>
+      body {
+        font-family: 'Inter', sans-serif;
+        background: #f5f5f5;
+        color: #2d3748;
+        line-height: 1.6;
+      }
+
+      .bill-container {
+        max-width: 800px;
+        margin: 20px auto;
+        padding: 40px;
+        border: 1px solid #e2e8f0;
+        background: white;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+        border-radius: 12px;
+      }
+
+      .company-header {
+        text-align: center;
+        margin-bottom: 32px;
+        padding: 20px;
+        border-bottom: 2px solid #e2e8f0;
+      }
+
+      .company-header h1 {
+        font-family: 'Playfair Display', serif;
+        font-size: 32px;
+        color: #1a202c;
+        margin-bottom: 8px;
+      }
+
+      .company-header p {
+        color: #4a5568;
+        margin: 4px 0;
+      }
+
+      .company-logo {
+        max-width: 150px;
+        height: auto;
+        margin-bottom: 16px;
+      }
+
+      .bill-details {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 24px;
+        margin-bottom: 32px;
+        padding: 20px;
+        background: #f8fafc;
+        border-radius: 8px;
+      }
+
+      .bill-details h2 {
+        font-size: 14px;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+        color: #64748b;
+        margin-bottom: 8px;
+      }
+
+      .items-list {
+        margin: 24px 0;
+      }
+
+      .item {
+        padding: 16px 0;
+        border-bottom: 1px solid #e2e8f0;
+      }
+
+      .item:last-child {
+        border-bottom: none;
+      }
+
+      .item-name {
+        font-weight: 600;
+        font-size: 16px;
+        margin-bottom: 8px;
+        color: #1a202c;
+      }
+
+      .item-details {
+        display: flex;
+        justify-content: space-between;
+        color: #4a5568;
+        font-size: 14px;
+        max-width: 300px;
+      }
+
+      .total-section {
+        text-align: right;
+        margin: 32px 0;
+        padding: 20px;
+        background: #f8fafc;
+        border-radius: 8px;
+        border: 1px solid #e2e8f0;
+      }
+
+      .total-section h3 {
+        font-size: 22px;
+        color: #1a202c;
+        margin-bottom: 8px;
+      }
+
+      .total-section p {
+        color: #64748b;
+        font-size: 14px;
+      }
+
+      .thank-you {
+        text-align: center;
+        margin-top: 40px;
+        padding: 24px;
+        font-style: italic;
+        color: #64748b;
+        border-top: 2px solid #e2e8f0;
+      }
+
+      @media print {
+        body {
+          background: white;
+        }
+        .bill-container {
+          box-shadow: none;
+          border: none;
+          margin: 0;
+          padding: 20px;
+        }
+        .no-print {
+          display: none;
+        }
+      }
+
+      @media screen and (max-width: 600px) {
+        .bill-container {
+          margin: 10px;
+          padding: 20px;
+        }
+        .items-table {
+          font-size: 12px;
+        }
+        .items-table th, .items-table td {
+          padding: 8px;
+        }
+        .company-header h1 {
+          font-size: 24px;
+        }
+      }
+
+      .items-table {
+        width: 100%;
+        border-collapse: collapse;
+        margin: 24px 0;
+        font-size: 12px;
+        border: 2px solid #2d3748;
+      }
+
+      .items-table th, .items-table td {
+        border: 1px solid #2d3748;
+        padding: 12px 16px;
+        text-align: left;
+      }
+
+      .items-table th {
+        background: #2d3748;
+        font-weight: 400;
+        color: white;
+        text-transform: uppercase;
+        font-size: 14px;
+        letter-spacing: 0.05em;
+      }
+
+      .items-table td {
+        word-break: break-word;
+      }
+
+      .items-table tr:nth-child(even) {
+        background-color: #f8fafc;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="bill-container">
+      <div id="billContent">
+        <div class="loading">Loading bill details...</div>
+      </div>
+      <button onclick="window.print()" class="no-print">Print</button>
+    </div>
+
+    <!-- Firebase SDK -->
+    <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore-compat.js"></script>
+    <script src="app.js"></script>
+    <script>
+      firebase.firestore().collection('shop').doc('details').get()
+        .then(doc => console.log('Shop details test:', doc.data()))
+        .catch(err => console.error('Shop details test error:', err));
+    </script>
+  </body>
+</html>

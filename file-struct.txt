@@ -1,0 +1,40 @@
+saree-shop-app/
+├── src/
+│   ├── components/
+│   │   ├── billing/
+│   │   ├── customer/
+│   │   ├── analytics/
+│   │   └── shop/
+│   ├── screens/
+│   │   ├── BillingScreen.js
+│   │   ├── CustomerScreen.js
+│   │   ├── AnalyticsScreen.js
+│   │   └── ShopScreen.js
+│   ├── navigation/
+│   │   └── TabNavigator.js
+│   ├── utils/
+│   │   ├── firebase.js
+│   │   ├── pdfGenerator.js
+│   │   └── helpers.js
+│   ├── constants/
+│   │   ├── colors.js
+│   │   ├── theme.js
+│   │   └── config.js
+│   └── context/
+│       └── ShopContext.js
+└── App.js
+
+# Install dependencies if not already installed
+npm install
+
+# Generate native code
+npx expo prebuild
+
+# Navigate to android directory
+cd android
+
+# Clean previous builds
+./gradlew clean
+
+# Create release build
+./gradlew assembleRelease
