@@ -118,7 +118,6 @@ This project is for educational and internship demonstration purposes only. Not 
 
 ## 🙋‍♂️ Author
 
-**Internship Project by:** [Your Name]  
-**Under the guidance of:** [Your Mentor / College / Company Name]  
+**Internship Project by:** Parshwa Salot 22IT135
 **Date:** May–June 2025
 
